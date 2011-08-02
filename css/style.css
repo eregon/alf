@@ -1,7 +1,7 @@
 body {
-  padding: 10px 100px;
-  font-family: corbel, 'lucida grande', helvetica, sans-serif;
-  font-size: 16px;  
+  padding: 10px 130px;
+  font-family: Palatino, serif;
+  font-size: 18px;  
 }
 
 a, a:visited {
@@ -13,14 +13,32 @@ a:hover {
 }
 
 #menu {
+  width: 280px;
   position: absolute;
-  text-align: right;
+  top: 35px;
 }
 #menu ul {
+  text-align: right;
   list-style: none;
+}
+#menu .links {
+  padding-top: 15px;
+}
+#menu p.ops {
+  font-size: 16px;
+  /*text-align: justify;*/
+}
+#menu .entry {
+  border-bottom: 1px solid #444444;
 }
 
 #operator {
-  font-size: 14px;  
-  margin-left: 250px;
+  font-size: 14px;
+  margin-left: 320px;
+}
+
+#page {
+  margin-left: 320px;
+  padding-right: 30px;
+  text-align: justify;
 }

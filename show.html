@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head> 
+<meta charset='utf-8'> 
+<title>Alf -- Relational algebra at your finger tips (0.10.0)</title> 
+<!--[if lt IE 9]>
+<script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+<![endif]--> 
+<link href='css/style.css' rel='stylesheet'>
+</head>
+<body>
+<div id="menu">
+<div class="entry">Theory &amp; Overview</div>
+<ul>
+<li><a href="shell.html">alf in shell</a></li>
+</ul>
+<div class="entry">Relational operators</div>
+<ul>
+<li><a href="project.html">project</a></li>
+
+<li><a href="extend.html">extend</a></li>
+
+<li><a href="rename.html">rename</a></li>
+
+<li><a href="restrict.html">restrict</a></li>
+
+<li><a href="join.html">join</a></li>
+
+<li><a href="intersect.html">intersect</a></li>
+
+<li><a href="minus.html">minus</a></li>
+
+<li><a href="union.html">union</a></li>
+
+<li><a href="matching.html">matching</a></li>
+
+<li><a href="not-matching.html">not-matching</a></li>
+
+<li><a href="wrap.html">wrap</a></li>
+
+<li><a href="unwrap.html">unwrap</a></li>
+
+<li><a href="group.html">group</a></li>
+
+<li><a href="ungroup.html">ungroup</a></li>
+
+<li><a href="summarize.html">summarize</a></li>
+
+<li><a href="rank.html">rank</a></li>
+</ul>
+<div class="entry">Experimental operators</div>
+<ul>
+<li><a href="quota.html">quota</a></li>
+</ul>
+<div class="entry">Non-relational operators</div>
+<ul>
+<li><a href="autonum.html">autonum</a></li>
+
+<li><a href="defaults.html">defaults</a></li>
+
+<li><a href="compact.html">compact</a></li>
+
+<li><a href="sort.html">sort</a></li>
+
+<li><a href="clip.html">clip</a></li>
+
+<li><a href="coerce.html">coerce</a></li>
+</ul>
+<div class="entry">Other non-relational commands</div>
+<ul>
+<li><a href="exec.html">exec</a></li>
+
+<li><a href="help.html">help</a></li>
+
+<li><a href="show.html">show</a></li>
+</ul>
+</div>
+
+
+<pre id="operator">
+
+Output input tuples through a specific renderer (text, yaml, ...)
+
+SYNOPSIS
+  rake show DATASET
+
+OPTIONS
+      --rash                       Render output as ruby hashes
+      --text                       Render output as a text table
+      --yaml                       Render output as a yaml output
+      --csv                        Render output as a csv file
+
+DESCRIPTION
+
+When a dataset name is specified as commandline arg, request the 
+environment to provide this dataset and prints it. Otherwise, take what 
+comes on standard input.
+
+Note that this command is not an operator and should not be piped anymore.
+
+
+</pre>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16520635-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+

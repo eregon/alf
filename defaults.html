@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head> 
+<meta charset='utf-8'> 
+<title>Alf -- Relational algebra at your finger tips (0.10.0)</title> 
+<!--[if lt IE 9]>
+<script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+<![endif]--> 
+<link href='css/style.css' rel='stylesheet'>
+</head>
+<body>
+<div id="menu">
+<div class="entry">Theory &amp; Overview</div>
+<ul>
+<li><a href="shell.html">alf in shell</a></li>
+</ul>
+<div class="entry">Relational operators</div>
+<ul>
+<li><a href="project.html">project</a></li>
+
+<li><a href="extend.html">extend</a></li>
+
+<li><a href="rename.html">rename</a></li>
+
+<li><a href="restrict.html">restrict</a></li>
+
+<li><a href="join.html">join</a></li>
+
+<li><a href="intersect.html">intersect</a></li>
+
+<li><a href="minus.html">minus</a></li>
+
+<li><a href="union.html">union</a></li>
+
+<li><a href="matching.html">matching</a></li>
+
+<li><a href="not-matching.html">not-matching</a></li>
+
+<li><a href="wrap.html">wrap</a></li>
+
+<li><a href="unwrap.html">unwrap</a></li>
+
+<li><a href="group.html">group</a></li>
+
+<li><a href="ungroup.html">ungroup</a></li>
+
+<li><a href="summarize.html">summarize</a></li>
+
+<li><a href="rank.html">rank</a></li>
+</ul>
+<div class="entry">Experimental operators</div>
+<ul>
+<li><a href="quota.html">quota</a></li>
+</ul>
+<div class="entry">Non-relational operators</div>
+<ul>
+<li><a href="autonum.html">autonum</a></li>
+
+<li><a href="defaults.html">defaults</a></li>
+
+<li><a href="compact.html">compact</a></li>
+
+<li><a href="sort.html">sort</a></li>
+
+<li><a href="clip.html">clip</a></li>
+
+<li><a href="coerce.html">coerce</a></li>
+</ul>
+<div class="entry">Other non-relational commands</div>
+<ul>
+<li><a href="exec.html">exec</a></li>
+
+<li><a href="help.html">help</a></li>
+
+<li><a href="show.html">show</a></li>
+</ul>
+</div>
+
+
+<pre id="operator">
+
+Force default values on missing/nil attributes
+
+SYNOPSIS
+
+  alf defaults [--strict] [OPERAND] -- DEFAULTS
+
+OPTIONS
+      --strict                     Restrict to default attributes only?
+
+DESCRIPTION
+
+This non-relational operator rewrites input tuples to ensure that all 
+values for attribute names specified in DEFAULTS are present and not nil. 
+Missing or nil attributes are replaced by the specified default value.
+
+A value specified in DEFAULTS may be any tuple expression. This allows to 
+compute the default value as an expression on the current tuple.
+
+With --strict mode, the operator projects resulting tuples on attributes 
+for which a default value has been specified. Using the strict mode 
+guarantees that the heading of all tuples is the same, and that no nil 
+value ever remains. 
+
+Note that this operator never removes duplicates. Even in --strict mode 
+the result might be an invalid relation. 
+
+EXAMPLE
+
+  alf defaults suppliers -- country "'Belgium'"
+  alf defaults --strict suppliers -- country "'Belgium'"
+
+
+</pre>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16520635-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+

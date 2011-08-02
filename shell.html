@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <head> 
 <meta charset='utf-8'> 
-<title>Alf - Relational algebra at your finger tips (0.10.0)</title> 
+<title>Alf -- Relational algebra at your finger tips (0.10.0)</title> 
 <!--[if lt IE 9]>
 <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
 <![endif]--> 
 <link href='css/style.css' rel='stylesheet'>
 </head>
 <body>
-<a href="http://github.com/blambeau/alf"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 <div id="menu">
+<div class="entry">Theory &amp; Overview</div>
+<ul>
+<li><a href="shell.html">alf in shell</a></li>
+</ul>
 <div class="entry">Relational operators</div>
 <ul>
 <li><a href="project.html">project</a></li>
@@ -43,7 +46,9 @@
 <li><a href="summarize.html">summarize</a></li>
 
 <li><a href="rank.html">rank</a></li>
-
+</ul>
+<div class="entry">Experimental operators</div>
+<ul>
 <li><a href="quota.html">quota</a></li>
 </ul>
 <div class="entry">Non-relational operators</div>
@@ -59,6 +64,14 @@
 <li><a href="clip.html">clip</a></li>
 
 <li><a href="coerce.html">coerce</a></li>
+</ul>
+<div class="entry">Other non-relational commands</div>
+<ul>
+<li><a href="exec.html">exec</a></li>
+
+<li><a href="help.html">help</a></li>
+
+<li><a href="show.html">show</a></li>
 </ul>
 </div>
 
@@ -87,7 +100,7 @@ OPTIONS
   -h, --help                       Show help
   -v, --version                    Show version
 
-RELATIONAL COMMANDS
+RELATIONAL OPERATORS
   project          Relational projection (clip + compact)
   extend           Relational extension (additional, computed attributes)
   rename           Relational renaming (rename some attributes)
@@ -105,10 +118,10 @@ RELATIONAL COMMANDS
   summarize        Relational summarization (group-by + aggregate ops)
   rank             Relational ranking (explicit tuple positions)
 
-EXPERIMENTAL OPERATORS
+EXPERIMENTAL RELATIONAL OPERATORS
   quota     Generalized quota-queries (position, sum progression, etc.)
 
-NON-RELATIONAL COMMANDS
+NON-RELATIONAL OPERATORS
   autonum      Extend its operand with an unique autonumber attribute
   defaults     Force default values on missing/nil attributes
   compact      Remove tuple duplicates
@@ -125,6 +138,20 @@ See 'rake help COMMAND' for details about a specific command.
 
 
 </pre>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16520635-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 
 </body>
 

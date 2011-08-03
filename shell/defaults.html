@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head> 
+<meta charset='utf-8'> 
+<title>Alf -- Relational algebra at your finger tips (0.10.0)</title> 
+<!--[if lt IE 9]>
+<script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+<![endif]--> 
+<link href="../css/style.css" rel='stylesheet'>
+<link rel="stylesheet" href="http://yandex.st/highlightjs/6.0/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/6.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<a href="http://github.com/blambeau/alf"><img style="position: fixed; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div id="menu">
+
+
+<div class="entry">Overview</div>
+<ul>
+<li><a href="../overview/1-why.html">Why Alf ?</a></li>
+<li><a href="../overview/2-alf-in-shell.html">Using Alf in shell</a></li>
+<li><a href="../overview/3-alf-in-ruby.html">Using Alf in Ruby</a></li>
+</ul>
+
+
+
+<div class="entry">Alf in Shell</div>
+<div class="subentry">Relational operators</div>
+<p class="ops"><a href="../shell/project.html">project</a>, <a href="../shell/extend.html">extend</a>, <a href="../shell/rename.html">rename</a>, <a href="../shell/restrict.html">restrict</a>, <a href="../shell/join.html">join</a>, <a href="../shell/intersect.html">intersect</a>, <a href="../shell/minus.html">minus</a>, <a href="../shell/union.html">union</a>, <a href="../shell/matching.html">matching</a>, <a href="../shell/not-matching.html">not-matching</a>, <a href="../shell/wrap.html">wrap</a>, <a href="../shell/unwrap.html">unwrap</a>, <a href="../shell/group.html">group</a>, <a href="../shell/ungroup.html">ungroup</a>, <a href="../shell/summarize.html">summarize</a>, <a href="../shell/rank.html">rank</a></p>
+
+
+
+<div class="subentry">Experimental operators</div>
+<p class="ops"><a href="../shell/quota.html">quota</a></p>
+
+
+
+<div class="subentry">Non-relational operators</div>
+<p class="ops"><a href="../shell/autonum.html">autonum</a>, <a href="../shell/defaults.html">defaults</a>, <a href="../shell/compact.html">compact</a>, <a href="../shell/sort.html">sort</a>, <a href="../shell/clip.html">clip</a>, <a href="../shell/coerce.html">coerce</a></p>
+
+
+
+<div class="subentry">Other commands</div>
+<p class="ops"><a href="../shell/exec.html">exec</a>, <a href="../shell/help.html">help</a>, <a href="../shell/show.html">show</a></p>
+
+
+
+
+
+<div class="entry">Alf in Ruby</div>
+...under construction...
+
+
+
+</div>
+
+
+
+<div id="page">
+
+
+<h2>DEFAULTS</h2>
+<pre><code class="bash">
+Force default values on missing/nil attributes
+
+SYNOPSIS
+
+  alf defaults [--strict] [OPERAND] -- DEFAULTS
+
+OPTIONS
+      --strict                     Restrict to default attributes only?
+
+DESCRIPTION
+
+This non-relational operator rewrites input tuples to ensure that all 
+values for attribute names specified in DEFAULTS are present and not nil. 
+Missing or nil attributes are replaced by the specified default value.
+
+A value specified in DEFAULTS may be any tuple expression. This allows to 
+compute the default value as an expression on the current tuple.
+
+With --strict mode, the operator projects resulting tuples on attributes 
+for which a default value has been specified. Using the strict mode 
+guarantees that the heading of all tuples is the same, and that no nil 
+value ever remains. 
+
+Note that this operator never removes duplicates. Even in --strict mode 
+the result might be an invalid relation. 
+
+EXAMPLE
+
+  alf defaults suppliers -- country "'Belgium'"
+  alf defaults --strict suppliers -- country "'Belgium'"
+
+</code></pre>
+
+</div>
+
+
+
+<div id="links">
+<a href="http://github.com/blambeau/alf" target="_blank"><img src="../images/github-128.png"/></a> 
+<a href="http://twitter.com/blambeau" target="_blank"><img src="../images/twitter-128.png"/></a> 
+</div>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16520635-5']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+

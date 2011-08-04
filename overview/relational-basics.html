@@ -77,38 +77,36 @@
 <li>A type is always accompanied with an equality operator, say <code>==</code>, that allows checking if two of its elements actually denote the same value. The notion of 'duplicate' precisely relies on this operator in an obvious way.</li>
 </ul>
 
-
 <p>Oh! and,</p>
 
 <ul>
-<li>NULL is <strong>not</strong> a value. Precisely, ''treating NULL as a value'' on one side and ''keeping a theory simple enough to be of any practical yet sound use'' on the other side are conflictual requirements. Therefore, here, NULL is not a value.</li>
+<li>NULL is <strong>not</strong> a value. Precisely, ''treating NULL as a value'' on one side and ''keeping a theory simple enough to be of any practical yet sound use'' on the other side are conflictual requirements. Therefore, here, NULL is not a value. </li>
 </ul>
-
 
 <h4>A few examples</h4>
 
-<p>The simplest scalar types are well known:</p>
-
-<blockquote><blockquote><ul>
+<p>The simplest scalar types are well known: </p>
+<blockquote>
+<blockquote>
+<ul>
 <li>(the set of) Boolean(s), Integer(s), Decimal(s), String(s), ...</li>
 </ul>
 </blockquote></blockquote>
-
-<p>There are others, of course:</p>
-
-<blockquote><blockquote><ul>
-<li>(the set of) Color(s), Size(s), Weight(s), Range(s), Coordinate(s), ...</li>
+<p>There are others, of course: </p>
+<blockquote>
+<blockquote>
+<ul>
+<li>(the set of) Color(s), Size(s), Weight(s), Range(s), Coordinate(s), ... </li>
 </ul>
 </blockquote></blockquote>
-
-<p>And even a few that people don't always expect to be types:</p>
-
-<blockquote><blockquote><ul>
+<p>And even a few that people don't always expect to be types: </p>
+<blockquote>
+<blockquote>
+<ul>
 <li>(the set of) List(s), Set(s), Tree(s), Graph(s), ...</li>
 </ul>
 </blockquote></blockquote>
-
-<p>Roughly, surrounding a set of immutable elements for which an equality operator makes sense <em>is</em> defining a type. Implementing it is another story, of course.</p>
+<p>Roughly, surrounding a set of immutable elements for which an equality operator makes sense <em>is</em> defining a type. Implementing it is another story, of course. </p>
 
 <h3>Tuples and Relations</h3>
 
@@ -122,7 +120,6 @@
 <li>A tuple being a value, it is immutable.</li>
 </ul>
 
-
 <p>We will denote tuple literals as follows (we assume that a Color type exists):</p>
 
 <pre class="theory"><code class="ruby">#
@@ -134,14 +131,11 @@
 Tuple( pid: 'P1', name: 'Nut', color: Color('red'), heavy: true )
 </code></pre>
 
-
-
-
 <p><p class="note">Alf uses Ruby Hashes for implementing tuples. The example above is syntaxtically correct in Ruby 1.9.x and returns a Hash when usign Alf. Of course, there are hashes that do not implement valid tuples (those containing nil, for example). Alf assumes that you use them in accordance with this background (in an immutable way, among others); it does <strong>not</strong> systematically enforce this precondition. It's up to you to use Alf the correct way.<p></p>
 
 <p>The type of a tuple is simply defined in terms of its heading. A <em>heading</em> is defined as a set of attribute (name, type name) pairs. For example, the heading of the tuple show above is:</p>
 
-<p><pre class="theory"><code class="ruby">Heading( pid: String, name: String, color: Color, heavy: Boolean )</code></pre></p>
+<pre class="theory"><code class="ruby">Heading( pid: String, name: String, color: Color, heavy: Boolean )</code></pre>
 
 <p><p class="note">Alf assumes that types are implemented with Ruby classes. String, Color and Boolean are all valid class names in Ruby, though it's worth noting that the Boolean class does not natively exists. As it is of huge importance for Alf, it defines it in such a way that everything looks fine. The Color class is assumed here to be a user-defined class. Not all user-defined classes implement valid types. Alf assumes that you use them in accordance with this background; it does <strong>not</strong> systematically enforce this precondition. It's up to you to use Alf the correct way.<p></p>
 
@@ -153,28 +147,56 @@ Tuple( pid: 'P1', name: 'Nut', color: Color('red'), heavy: true )
 <li>A relation being a value, it is immutable.</li>
 </ul>
 
-
 <p>We will denote relation literals as follows:</p>
 
-<p><pre class="theory"><code class="ruby">Relation(
+<pre class="theory"><code class="ruby">Relation(
   Tuple( pid: 'P1', name: 'Nut',   color: Color('red'),   heavy: true  ),
   Tuple( pid: 'P2', name: 'Bolt',  color: Color('green'), heavy: false ),
   Tuple( pid: 'P3', name: 'Screw', color: Color('blue'),  heavy: false )
-)</code></pre></p>
+)</code></pre>
 
 <p><p class="note">The example above is syntaxtically correct in Alf and returns a relation data structure. Alf support other ways of obtaining relations than literals. Among others, it recognizes different data sources, like .csv files or SQL tables. In any way, Alf assumes that you use relations in accordance with this background; it does <strong>not</strong> systematically enforce this precondition. It's up to you to use Alf the correct way.<p></p>
 
 <p>The type of a relation is simply defined in terms of its heading. For example, the heading of the relation show above is:</p>
 
-<p><pre class="theory"><code class="ruby">Heading( pid: String, name: String, color: Color, heavy: Boolean )</code></pre></p>
+<pre class="theory"><code class="ruby">Heading( pid: String, name: String, color: Color, heavy: Boolean )</code></pre>
 
 <h3>Relational algebra</h3>
 
-<p>... under construction ...</p>
+<p>Relational algebra is to relations what elementary algebra is to numbers and quantities in formulae and equations. Consider the following elementary formula:</p>
+
+<pre class="theory"><code class="ruby">z = 2 * (x + y)</code></pre>
+
+<p>Evaluating this formula with <code>x = 5</code> and <code>y = 3</code> yields a value for <code>z</code>:</p>
+
+<pre class="theory"><code class="ruby">16 = 2 * (5 + 3)</code></pre>
+
+<p>Thanks to known properties of the operators, like associativity or commutativity, formulae can be manipulated. For example, the formula above can be rewritten into the following equivalent form:</p>
+
+<pre class="theory"><code class="ruby">z = (2 * x) +  (2 * y) </code></pre>
+
+<p>Relational algebra is similar, but applies on relations, and have different operators and associated rules. For example:</p>
+
+<pre class="theory"><code class="ruby">#
+#  What are red or heavy parts ?
+#
+(union 
+  (restrict :parts, ->(){ color == Color('red') }),
+  (restrict :parts, ->(){ heavy == true         }))
+</code></pre>
+
+<p>Can be rephrased/rewritten as</p>
+
+<pre class="theory"><code class="ruby">#
+#  What parts are either red or heavy ?
+#
+(restrict :parts, ->(){ (color == Color('red')) or (heavy == true) })
+</code></pre>
 
 <h3>Footnotes</h3>
 
-<p>[1] even if you don't <em>declare</em> that type, it exists. So-called 'duck typing' does not mean 'types do not exists', it means 'we do not enforce them when passing arguments', roughly.</p>
+<p>[1] even if you don't <em>declare</em> that type, it exists. So-called 'duck typing' does not mean 'types do not exists', it means 'we do not enforce them when passing arguments', roughly. </p>
+
 </div>
 
 

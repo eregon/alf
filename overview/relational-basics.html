@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head> 
 <meta charset='utf-8'> 
-<title>Alf in Shell: sort</title> 
+<title>Relational basics</title> 
 <!--[if lt IE 9]>
 <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
 <![endif]--> 
@@ -60,33 +60,35 @@
 
 
 <div id="page">
+<h2>Relational basics</h2>
+
+<p>This page provides the necessary background on relational theory to understand Alf. Note that it only covers the concepts needed to understand the relational <em>algebra</em>; that is, nothing is said about database schemas, normal forms, transactions, ACID properties, and so on. Refer to standard database literature for those.</p>
+
+<p>The background given below is a rephrasing of what can be found in The Third Manifesto (TTM), by Hugh Darwen C.J. Date. See <a href="http://www.thethirdmanifesto.com">www.thethirdmanifesto.com</a>, <a href="http://www.amazon.com/Databases-Types-Relational-Model-3rd/dp/0321399420">the TTM book</a> or <a href="/overview/where-alf-does-come-from.html">Where does Alf come from?</a>.</p>
+
+<h3>A theory of types</h3>
+
+<p>To understand what relational algebra is about, you first need to understand the underlying theory of types. Forget about object-oriented programming for a moment (if you are a developer) and remember the simple following background:</p>
+
+<ul>
+<li>A <em>type</em> is a (finite) <strong>set</strong> of values. A <em>subtype</em> is a subset. Sets are <strong>not ordered</strong> and have <strong>no duplicates</strong>.</li>
+<li>A <em>value</em> is an element of a type. We say that the value <em>belongs to</em> the type.</li>
+<li>A value is <strong>immutable</strong>, intrinsically <strong>typed</strong> [1], has no localization in time and space, and can be of arbitrary complexity.</li>
+<li>A type is always accompanied with an equality operator, say <code>==</code>, that allows checking if two of its elements actually denote the same value. The notion of 'duplicate' precisely relies on this operator in an obvious way.</li>
+</ul>
 
 
-<h2>SORT</h2>
-<pre><code class="bash">
-Sort input tuples according to an order relation
+<p>Oh! and,</p>
 
-SYNOPSIS
+<ul>
+<li>NULL is <strong>not</strong> a value. Precisely, 'treating NULL as a value' on one side and 'keeping a theory simple enough to be of any practical yet sound use' on the other side are conflictual requirements. Therefore, here, NULL is not a value.</li>
+</ul>
 
-  alf sort [OPERAND] -- ORDERING
 
-DESCRIPTION
+<h3>Footnotes</h3>
 
-This non-relational operator sorts input tuples according to ORDERING. 
-
-This is, of course, a non relational operator as relations are unordered 
-sets. It is provided for displaying purposes and normalization of 
-non-relational inputs.
-
-EXAMPLE
-
-  alf sort suppliers -- name asc
-  alf sort suppliers -- city desc name asc
-
-</code></pre>
-
+<p>[1] even if you don't <em>declare</em> that type, it exists. So-called 'duck typing' does not mean 'types do not exists', it means 'we do not enforce them when passing arguments', roughly.</p>
 </div>
-
 
 
 <div id="links">

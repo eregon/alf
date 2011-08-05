@@ -65,34 +65,57 @@
 
 
 <h2>CLIP</h2>
-<pre><code class="bash">
-Clip input tuples to a subset of attributes
+<p>Clip input tuples to a subset of attributes</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf clip [--allbut] [OPERAND] -- ATTR_LIST
+<p>alf clip [--allbut] [OPERAND] -- ATTR_LIST</p>
 
-OPTIONS
-      --allbut                     Apply an allbut clipping?
+<p>OPTIONS
+      --allbut                     Apply an allbut clipping?</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator clips tuples on attributes whose names are specified in 
+<p>This operator clips tuples on attributes whose names are specified in 
 ATTR_LIST. This is similar to the relational PROJECT operator, expect
-that CLIP does not remove duplicates afterwards.
+that CLIP does not remove duplicates afterwards.</p>
 
-Clipping may therefore lead to bags of tuples instead of sets. The result
-is **not** a valid relation unless a candidate key is preserved.
+<p>Clipping may therefore lead to bags of tuples instead of sets. The result
+is <strong>not</strong> a valid relation unless a candidate key is preserved.</p>
 
-With --allbut, the operator keeps attributes in ATTR_LIST, instead of 
-projecting them away. 
+<p>With --allbut, the operator keeps attributes in ATTR_LIST, instead of 
+projecting them away. </p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf clip suppliers -- name city
-  alf clip suppliers --allbut -- name city
+<p># Clip suppliers on <code>name</code> and <code>city</code>
+  $ alf clip suppliers -- name city</p>
 
+<pre><code>+-------+--------+
+| :name | :city  |
++-------+--------+
+| Smith | London |
+| Jones | Paris  |
+| Blake | Paris  |
+| Clark | London |
+| Adams | Athens |
++-------+--------+
 </code></pre>
+
+<p># Clip suppliers on all other attributes
+  $ alf clip suppliers --allbut -- name city</p>
+
+<pre><code>+------+---------+
+| :sid | :status |
++------+---------+
+| S1   |      20 |
+| S2   |      10 |
+| S3   |      30 |
+| S4   |      20 |
+| S5   |      30 |
++------+---------+
+</code></pre>
+
 
 </div>
 

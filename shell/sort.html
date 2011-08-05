@@ -65,27 +65,51 @@
 
 
 <h2>SORT</h2>
-<pre><code class="bash">
-Sort input tuples according to an order relation
+<p>Sort input tuples according to an order relation</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf sort [OPERAND] -- ORDERING
+<p>alf sort [OPERAND] -- ORDERING</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This non-relational operator sorts input tuples according to ORDERING. 
+<p>This non-relational operator sorts input tuples according to ORDERING. </p>
 
-This is, of course, a non relational operator as relations are unordered 
+<p>This is, of course, a non relational operator as relations are unordered 
 sets. It is provided for displaying purposes and normalization of 
-non-relational inputs.
+non-relational inputs.</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf sort suppliers -- name asc
-  alf sort suppliers -- city desc name asc
+<p># Sort suppliers by name
+  $ alf sort suppliers -- name asc</p>
 
+<pre><code>+------+-------+---------+--------+
+| :sid | :name | :status | :city  |
++------+-------+---------+--------+
+| S5   | Adams |      30 | Athens |
+| S3   | Blake |      30 | Paris  |
+| S4   | Clark |      20 | London |
+| S2   | Jones |      10 | Paris  |
+| S1   | Smith |      20 | London |
++------+-------+---------+--------+
 </code></pre>
+
+<p># Sort suppliers by city in descending order, then on name on ascending 
+  # order
+  $ alf sort suppliers -- city desc name asc</p>
+
+<pre><code>+------+-------+---------+--------+
+| :sid | :name | :status | :city  |
++------+-------+---------+--------+
+| S3   | Blake |      30 | Paris  |
+| S2   | Jones |      10 | Paris  |
+| S4   | Clark |      20 | London |
+| S1   | Smith |      20 | London |
+| S5   | Adams |      30 | Athens |
++------+-------+---------+--------+
+</code></pre>
+
 
 </div>
 

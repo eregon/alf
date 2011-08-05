@@ -65,31 +65,50 @@
 
 
 <h2>PROJECT</h2>
-<pre><code class="bash">
-Relational projection (clip + compact)
+<p>Relational projection (clip + compact)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf project [--allbut] [OPERAND] -- ATTR_LIST
+<p>alf project [--allbut] [OPERAND] -- ATTR_LIST</p>
 
-OPTIONS
-      --allbut                     Project all but specified attributes?
+<p>OPTIONS
+      --allbut                     Project all but specified attributes?</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator projects tuples on attributes whose names are specified in 
-ATTR_LIST. Unlike SQL, this operator **always** removes duplicates in the
-result so that the output is a set of tuples, that is, a relation.
+<p>This operator projects tuples on attributes whose names are specified in 
+ATTR_LIST. Unlike SQL, this operator <strong>always</strong> removes duplicates in the
+result so that the output is a set of tuples, that is, a relation.</p>
 
-With --allbut, the operators projects attributes in ATTR_LIST away instead 
-of keeping them. 
+<p>With --allbut, the operators projects attributes in ATTR_LIST away instead 
+of keeping them. </p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf project suppliers -- name city
-  alf project --allbut suppliers -- name city
+<pre><code># What are supplier cities ?
+$ alf project suppliers -- city
 
+  +--------+
+  | :city  |
+  +--------+
+  | London |
+  | Paris  |
+  | Athens |
+  +--------+
+
+# What are all but supplier's id and name
+$ alf project --allbut suppliers -- sid name
+
+  +---------+--------+
+  | :status | :city  |
+  +---------+--------+
+  |      20 | London |
+  |      10 | Paris  |
+  |      30 | Paris  |
+  |      30 | Athens |
+  +---------+--------+
 </code></pre>
+
 
 </div>
 

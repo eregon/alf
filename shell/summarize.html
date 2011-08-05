@@ -65,30 +65,38 @@
 
 
 <h2>SUMMARIZE</h2>
-<pre><code class="bash">
-Relational summarization (group-by + aggregate ops)
+<p>Relational summarization (group-by + aggregate ops)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf summarize [--allbut] [OPERAND] -- BY_LIST -- SUMMARIZATION
+<p>alf summarize [--allbut] [OPERAND] -- BY_LIST -- SUMMARIZATION</p>
 
-OPTIONS
-      --allbut                     Summarize on all but specified attributes?
+<p>OPTIONS
+      --allbut                     Summarize on all but specified attributes?</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator summarizes input tuples over a projection given by BY_LIST.
-SUMMARIZATION is a list of (name, aggregator) pairs.
+<p>This operator summarizes input tuples over a projection given by BY_LIST.
+SUMMARIZATION is a list of (name, aggregator) pairs.</p>
 
-With --allbut, the operator uses all attributes not in BY_LIST as 
-projection key.
+<p>With --allbut, the operator uses all attributes not in BY_LIST as 
+projection key.</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf summarize supplies -- sid -- total_qty "sum(:qty)" 
-  alf summarize supplies --allbut -- pid qty -- total_qty "sum(:qty)" 
+<pre><code># Compute the sum of supplied quantities, by supplier id
+$ alf summarize supplies -- sid -- total_qty &quot;sum(:qty)&quot;
 
+  +------+------------+
+  | :sid | :total_qty |
+  +------+------------+
+  | S1   |       1300 |
+  | S2   |        700 |
+  | S3   |        200 |
+  | S4   |        900 |
+  +------+------------+
 </code></pre>
+
 
 </div>
 

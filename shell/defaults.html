@@ -65,39 +65,37 @@
 
 
 <h2>DEFAULTS</h2>
-<pre><code class="bash">
-Force default values on missing/nil attributes
+<p>Force default values on missing/nil attributes</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf defaults [--strict] [OPERAND] -- DEFAULTS
+<p>alf defaults [--strict] [OPERAND] -- DEFAULTS</p>
 
-OPTIONS
-      --strict                     Restrict to default attributes only?
+<p>OPTIONS
+      --strict                     Restrict to default attributes only?</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This non-relational operator rewrites input tuples to ensure that all 
+<p>This non-relational operator rewrites input tuples to ensure that all 
 values for attribute names specified in DEFAULTS are present and not nil. 
-Missing or nil attributes are replaced by the specified default value.
+Missing or nil attributes are replaced by the specified default value.</p>
 
-A value specified in DEFAULTS may be any tuple expression. This allows to 
-compute the default value as an expression on the current tuple.
+<p>A value specified in DEFAULTS may be any tuple expression. This allows to 
+compute the default value as an expression on the current tuple.</p>
 
-With --strict mode, the operator projects resulting tuples on attributes 
+<p>With --strict mode, the operator projects resulting tuples on attributes 
 for which a default value has been specified. Using the strict mode 
 guarantees that the heading of all tuples is the same, and that no nil 
-value ever remains. 
+value ever remains. </p>
 
-Note that this operator never removes duplicates. Even in --strict mode 
-the result might be an invalid relation. 
+<p>Note that this operator never removes duplicates. Even in --strict mode 
+the result might be an invalid relation. </p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf defaults suppliers -- country "'Belgium'"
-  alf defaults --strict suppliers -- country "'Belgium'"
+<p>alf defaults suppliers -- country &quot;'Belgium'&quot;
+  alf defaults --strict suppliers -- country &quot;'Belgium'&quot;</p>
 
-</code></pre>
 
 </div>
 

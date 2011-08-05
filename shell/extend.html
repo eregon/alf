@@ -65,25 +65,42 @@
 
 
 <h2>EXTEND</h2>
-<pre><code class="bash">
-Relational extension (additional, computed attributes)
+<p>Relational extension (additional, computed attributes)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf extend [OPERAND] -- EXTENSIONS
+<p>alf extend [OPERAND] -- EXTENSIONS</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator extends its operand with new attributes whose value is the 
+<p>This operator extends its operand with new attributes whose value is the 
 result of evaluating tuple expressions. The latter are specified as 
 (name, tuple expression) pairs. Tuple expressions must be specified as 
-ruby code literals. 
+ruby code literals. </p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf extend supplies -- big "qty > 100"  price "qty * 12.2"
+<pre><code># Compute a few attributes on suppliers by extension
+$ alf extend supplies -- big &quot;qty &gt; 100&quot;  price &quot;qty * 12.2&quot;
 
+  +------+------+------+-------+--------------+
+  | :sid | :pid | :qty | :big  | :price       |
+  +------+------+------+-------+--------------+
+  | S1   | P1   |  300 | true  | 3660.0000000 |
+  | S1   | P2   |  200 | true  | 2440.0000000 |
+  | S1   | P3   |  400 | true  | 4880.0000000 |
+  | S1   | P4   |  200 | true  | 2440.0000000 |
+  | S1   | P5   |  100 | false | 1220.0000000 |
+  | S1   | P6   |  100 | false | 1220.0000000 |
+  | S2   | P1   |  300 | true  | 3660.0000000 |
+  | S2   | P2   |  400 | true  | 4880.0000000 |
+  | S3   | P2   |  200 | true  | 2440.0000000 |
+  | S4   | P2   |  200 | true  | 2440.0000000 |
+  | S4   | P4   |  300 | true  | 3660.0000000 |
+  | S4   | P5   |  400 | true  | 4880.0000000 |
+  +------+------+------+-------+--------------+
 </code></pre>
+
 
 </div>
 

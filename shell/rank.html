@@ -65,32 +65,56 @@
 
 
 <h2>RANK</h2>
-<pre><code class="bash">
-Relational ranking (explicit tuple positions)
+<p>Relational ranking (explicit tuple positions)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf rank [OPERAND] -- ORDERING -- RANK_NAME
+<p>alf rank [OPERAND] -- ORDERING -- RANK_NAME</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator computes the ranking of input tuples, according to ORDERING. 
+<p>This operator computes the ranking of input tuples, according to ORDERING. </p>
 
-Precisely, it extends its operand with a RANK_NAME attribute whose value 
+<p>Precisely, it extends its operand with a RANK_NAME attribute whose value 
 is the number of tuples which are considered strictly less according to 
-ORDERING. 
+ORDERING. </p>
 
-Note that, unless the ordering includes a candidate key for the input
+<p>Note that, unless the ordering includes a candidate key for the input
 relation, the newly RANK_NAME attribute is not necessarily a candidate key
-for the output. 
+for the output. </p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf rank parts -- weight -- position
-  alf rank parts -- weight desc -- position
-  alf rank parts -- weight desc pid asc -- position
+<pre><code># Rank parts by weight 
+$ alf rank parts -- weight -- position
 
+  +------+-------+--------+------------+--------+-----------+
+  | :pid | :name | :color | :weight    | :city  | :position |
+  +------+-------+--------+------------+--------+-----------+
+  | P1   | Nut   | Red    | 12.0000000 | London |         0 |
+  | P5   | Cam   | Blue   | 12.0000000 | Paris  |         0 |
+  | P4   | Screw | Red    | 14.0000000 | London |         2 |
+  | P2   | Bolt  | Green  | 17.0000000 | Paris  |         3 |
+  | P3   | Screw | Blue   | 17.0000000 | Oslo   |         3 |
+  | P6   | Cog   | Red    | 19.0000000 | London |         5 |
+  +------+-------+--------+------------+--------+-----------+
+
+# Rank parts by weight in descending order. Ensure that position is a 
+# candidate key by including a key in ordering
+$ alf rank parts -- weight desc pid asc -- position
+
+  +------+-------+--------+------------+--------+-----------+
+  | :pid | :name | :color | :weight    | :city  | :position |
+  +------+-------+--------+------------+--------+-----------+
+  | P6   | Cog   | Red    | 19.0000000 | London |         0 |
+  | P2   | Bolt  | Green  | 17.0000000 | Paris  |         1 |
+  | P3   | Screw | Blue   | 17.0000000 | Oslo   |         2 |
+  | P4   | Screw | Red    | 14.0000000 | London |         3 |
+  | P1   | Nut   | Red    | 12.0000000 | London |         4 |
+  | P5   | Cam   | Blue   | 12.0000000 | Paris  |         5 |
+  +------+-------+--------+------------+--------+-----------+
 </code></pre>
+
 
 </div>
 

@@ -65,28 +65,50 @@
 
 
 <h2>AUTONUM</h2>
-<pre><code class="bash">
-Extend its operand with an unique autonumber attribute
+<p>Extend its operand with an unique autonumber attribute</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf autonum [OPERAND] -- ATTRNAME
+<p>alf autonum [OPERAND] -- ATTRNAME</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This non-relational operator guarantees uniqueness of output tuples by
-adding an attribute ATTRNAME whose value is an auto-numbered Integer. 
+<p>This non-relational operator guarantees uniqueness of output tuples by
+adding an attribute ATTRNAME whose value is an auto-numbered Integer. </p>
 
-If the presence of duplicates was the only "non-relational" aspect of 
+<p>If the presence of duplicates was the only &quot;non-relational&quot; aspect of 
 the input, the result is a valid relation for which ATTRNAME is a 
-candidate key.
+candidate key.</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf autonum suppliers
-  alf autonum suppliers -- unique_id
+<pre><code># Autonumber suppliers with default attribute name
+$ alf autonum suppliers
 
+  +------+-------+---------+--------+----------+
+  | :sid | :name | :status | :city  | :autonum |
+  +------+-------+---------+--------+----------+
+  | S1   | Smith |      20 | London |        0 |
+  | S2   | Jones |      10 | Paris  |        1 |
+  | S3   | Blake |      30 | Paris  |        2 |
+  | S4   | Clark |      20 | London |        3 |
+  | S5   | Adams |      30 | Athens |        4 |
+  +------+-------+---------+--------+----------+
+
+# Autonumber suppliers with a `unique_id` attribute
+$ alf autonum suppliers -- unique_id
+
+  +------+-------+---------+--------+------------+
+  | :sid | :name | :status | :city  | :unique_id |
+  +------+-------+---------+--------+------------+
+  | S1   | Smith |      20 | London |          0 |
+  | S2   | Jones |      10 | Paris  |          1 |
+  | S3   | Blake |      30 | Paris  |          2 |
+  | S4   | Clark |      20 | London |          3 |
+  | S5   | Adams |      30 | Athens |          4 |
+  +------+-------+---------+--------+------------+
 </code></pre>
+
 
 </div>
 

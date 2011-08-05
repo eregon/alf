@@ -65,26 +65,33 @@
 
 
 <h2>NOT-MATCHING</h2>
-<pre><code class="bash">
-Relational not matching (inverse of matching)
+<p>Relational not matching (inverse of matching)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf not-matching [LEFT] RIGHT
+<p>alf not-matching [LEFT] RIGHT</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator restricts LEFT tuples to those for which there does not 
+<p>This operator restricts LEFT tuples to those for which there does not 
 exist any tuple in RIGHT that (naturally) joins. This is a shortcut 
-operator for the following longer expression: 
+operator for the following longer expression: </p>
 
-        (minus xxx, (matching xxx, yyy))
-
-EXAMPLE
-
-  alf not-matching suppliers supplies
- 
+<pre><code>(minus xxx, (matching xxx, yyy))
 </code></pre>
+
+<p>EXAMPLE</p>
+
+<pre><code># Which suppliers do not supply any part?
+$ alf not-matching suppliers supplies
+
+  +------+-------+---------+--------+
+  | :sid | :name | :status | :city  |
+  +------+-------+---------+--------+
+  | S5   | Adams |      30 | Athens |
+  +------+-------+---------+--------+
+</code></pre>
+
 
 </div>
 

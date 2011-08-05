@@ -65,25 +65,35 @@
 
 
 <h2>WRAP</h2>
-<pre><code class="bash">
-Relational wraping (tuple-valued attributes)
+<p>Relational wraping (tuple-valued attributes)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf wrap [OPERAND] -- ATTR_LIST -- AS
+<p>alf wrap [OPERAND] -- ATTR_LIST -- AS</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator wraps attributes in ATTR_LIST as a new, tuple-valued
-attribute named AS.
+<p>This operator wraps attributes in ATTR_LIST as a new, tuple-valued
+attribute named AS.</p>
 
-With --allbut, it wraps all attributes not specified in ATTR_LIST instead.
+<p>With --allbut, it wraps all attributes not specified in ATTR_LIST instead.</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf wrap suppliers -- city status -- loc_and_status
+<pre><code># Wrap `city` and `status` and a tuple-value attribute named `loc_and_status` 
+$ alf wrap suppliers -- city status -- loc_and_status
 
+  +------+-------+--------------------------------+
+  | :sid | :name | :loc_and_status                |
+  +------+-------+--------------------------------+
+  | S1   | Smith | {:city=&gt;&quot;London&quot;, :status=&gt;20} |
+  | S2   | Jones | {:city=&gt;&quot;Paris&quot;, :status=&gt;10}  |
+  | S3   | Blake | {:city=&gt;&quot;Paris&quot;, :status=&gt;30}  |
+  | S4   | Clark | {:city=&gt;&quot;London&quot;, :status=&gt;20} |
+  | S5   | Adams | {:city=&gt;&quot;Athens&quot;, :status=&gt;30} |
+  +------+-------+--------------------------------+
 </code></pre>
+
 
 </div>
 

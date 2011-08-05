@@ -65,26 +65,35 @@
 
 
 <h2>MATCHING</h2>
-<pre><code class="bash">
-Relational matching (join + project back on left)
+<p>Relational matching (join + project back on left)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf matching [LEFT] RIGHT
+<p>alf matching [LEFT] RIGHT</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator restricts its LEFT operand to tuples for which there exists 
+<p>This operator restricts its LEFT operand to tuples for which there exists 
 at least one tuple in RIGHT that (naturally) joins. This is a shortcut 
-operator for the following longer expression:
+operator for the following longer expression:</p>
 
-  (project (join xxx, yyy), [xxx's attributes])
+<p>(project (join xxx, yyy), [xxx's attributes])</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf matching suppliers supplies 
- 
+<pre><code># Which suppliers supply at least one part?
+$ alf matching suppliers supplies
+
+  +------+-------+---------+--------+
+  | :sid | :name | :status | :city  |
+  +------+-------+---------+--------+
+  | S1   | Smith |      20 | London |
+  | S2   | Jones |      10 | Paris  |
+  | S3   | Blake |      30 | Paris  |
+  | S4   | Clark |      20 | London |
+  +------+-------+---------+--------+
 </code></pre>
+
 
 </div>
 

@@ -65,29 +65,45 @@
 
 
 <h2>RESTRICT</h2>
-<pre><code class="bash">
-Relational restriction (aka where, predicate filtering)
+<p>Relational restriction (aka where, predicate filtering)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf restrict [OPERAND] -- PREDICATE
+<p>alf restrict [OPERAND] -- PREDICATE</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This command restricts tuples to those for which PREDICATE evaluates to 
-true.
+<p>This command restricts tuples to those for which PREDICATE evaluates to 
+true.</p>
 
-PREDICATE must be a valid tuple expression that returns a truth-value.
+<p>PREDICATE must be a valid tuple expression that returns a truth-value.
 It may be specified as a ruby code literal, or a list of (name, value)
 pairs. In the latter case, PREDICATE is built as a conjunction of 
-attribute equalities.
+attribute equalities.</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf restrict suppliers -- "status > 20"
-  alf restrict suppliers -- city "'London'"
+<pre><code># Who are suppliers with a status greater than 20?
+$ alf restrict suppliers -- &quot;status &gt; 20&quot;
 
+  +------+-------+---------+--------+
+  | :sid | :name | :status | :city  |
+  +------+-------+---------+--------+
+  | S3   | Blake |      30 | Paris  |
+  | S5   | Adams |      30 | Athens |
+  +------+-------+---------+--------+
+
+# Which suppliers live in London?
+$ alf restrict suppliers -- city &quot;'London'&quot;
+
+  +------+-------+---------+--------+
+  | :sid | :name | :status | :city  |
+  +------+-------+---------+--------+
+  | S1   | Smith |      20 | London |
+  | S4   | Clark |      20 | London |
+  +------+-------+---------+--------+
 </code></pre>
+
 
 </div>
 

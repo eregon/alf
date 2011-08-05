@@ -65,23 +65,33 @@
 
 
 <h2>RENAME</h2>
-<pre><code class="bash">
-Relational renaming (rename some attributes)
+<p>Relational renaming (rename some attributes)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf rename [OPERAND] -- RENAMING
+<p>alf rename [OPERAND] -- RENAMING</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This command renames attributes as specified in RENAMING, taken as 
-successive (old name, new name) pairs
+<p>This command renames attributes as specified in RENAMING, taken as 
+successive (old name, new name) pairs</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf rename suppliers -- name supplier_name  city supplier_city
+<pre><code># Rename a few supplier attributes
+$ alf rename suppliers -- name supplier_name  city supplier_city
 
+  +------+----------------+---------+----------------+
+  | :sid | :supplier_name | :status | :supplier_city |
+  +------+----------------+---------+----------------+
+  | S1   | Smith          |      20 | London         |
+  | S2   | Jones          |      10 | Paris          |
+  | S3   | Blake          |      30 | Paris          |
+  | S4   | Clark          |      20 | London         |
+  | S5   | Adams          |      30 | Athens         |
+  +------+----------------+---------+----------------+
 </code></pre>
+
 
 </div>
 

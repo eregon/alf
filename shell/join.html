@@ -65,26 +65,43 @@
 
 
 <h2>JOIN</h2>
-<pre><code class="bash">
-Relational join (and cross-join)
+<p>Relational join (and cross-join)</p>
 
-SYNOPSIS
+<p>SYNOPSIS</p>
 
-  alf join [LEFT] RIGHT
+<p>alf join [LEFT] RIGHT</p>
 
-DESCRIPTION
+<p>DESCRIPTION</p>
 
-This operator computes the (natural) join of its operands. 
+<p>This operator computes the (natural) join of its operands. </p>
 
-Natural join means that, unlike what is commonly used in SQL, the join is 
+<p>Natural join means that, unlike what is commonly used in SQL, the join is 
 performed on common attribute names. You can use the rename operator if 
-this behavior does not fit your needs.
+this behavior does not fit your needs.</p>
 
-EXAMPLE
+<p>EXAMPLE</p>
 
-  alf join suppliers supplies 
- 
+<pre><code># Computes natural join of suppliers and supplies
+$ alf join suppliers supplies
+
+  +------+-------+---------+--------+------+------+
+  | :sid | :name | :status | :city  | :pid | :qty |
+  +------+-------+---------+--------+------+------+
+  | S1   | Smith |      20 | London | P1   |  300 |
+  | S1   | Smith |      20 | London | P2   |  200 |
+  | S1   | Smith |      20 | London | P3   |  400 |
+  | S1   | Smith |      20 | London | P4   |  200 |
+  | S1   | Smith |      20 | London | P5   |  100 |
+  | S1   | Smith |      20 | London | P6   |  100 |
+  | S2   | Jones |      10 | Paris  | P1   |  300 |
+  | S2   | Jones |      10 | Paris  | P2   |  400 |
+  | S3   | Blake |      30 | Paris  | P2   |  200 |
+  | S4   | Clark |      20 | London | P2   |  200 |
+  | S4   | Clark |      20 | London | P4   |  300 |
+  | S4   | Clark |      20 | London | P5   |  400 |
+  +------+-------+---------+--------+------+------+
 </code></pre>
+
 
 </div>
 

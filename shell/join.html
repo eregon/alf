@@ -77,12 +77,16 @@
 <p>This operator computes the (natural) join of its operands. </p>
 
 <p>Natural join means that, unlike what is commonly used in SQL, the join is 
-performed on common attribute names. You can use the rename operator if 
-this behavior does not fit your needs.</p>
+performed on common attribute names. You can use the <code>rename</code> operator if this 
+behavior does not fit your needs.</p>
+
+<p>When operands have no attribute in common, this operator naturally &quot;degenerates&quot; 
+to a cross join.</p>
 
 <p>EXAMPLE</p>
 
-<pre><code># Computes natural join of suppliers and supplies
+<pre><code># Computes natural join of suppliers and supplies (on sid, the only 
+# attribute they have in common)
 $ alf join suppliers supplies
 
     +------+-------+---------+--------+------+------+

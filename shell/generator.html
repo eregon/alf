@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head> 
 <meta charset='utf-8'> 
-<title>Alf in Shell: wrap</title> 
+<title>Alf in Shell: generator</title> 
 <!--[if lt IE 9]>
 <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
 <![endif]--> 
@@ -64,37 +64,51 @@
 <div id="page">
 
 
-<h2>WRAP</h2>
-<p>Relational wraping (tuple-valued attributes)</p>
+<h2>GENERATOR</h2>
+<p>Generates a relation with an auto-numbered attribute</p>
 
 <p>SYNOPSIS</p>
 
-<pre><code>alf wrap [OPERAND] -- ATTR_LIST -- AS
+<pre><code>alf generator -- SIZE -- ATTR_NAME
 </code></pre>
-
-<p>OPTIONS</p>
 
 <p>DESCRIPTION</p>
 
-<p>This operator wraps attributes in ATTR_LIST as a new, tuple-valued
-attribute named AS.</p>
-
-<p>With --allbut, it wraps all attributes not specified in ATTR_LIST instead.</p>
+<p>This non-relational operator generates a relation containing an attribute 
+ATTR_NAME whose value is an auto-number from 1 to SIZE.</p>
 
 <p>EXAMPLE</p>
 
-<pre><code># Wrap `city` and `status` and a tuple-value attribute named `loc_and_status` 
-$ alf wrap suppliers -- city status -- loc_and_status
+<pre><code># Default behavior: ATTR_NAME is `num` and SIZE is 10
+$ alf generator
 
-    +------+-------+--------------------------------+
-    | :sid | :name | :loc_and_status                |
-    +------+-------+--------------------------------+
-    | S1   | Smith | {:city=&gt;&quot;London&quot;, :status=&gt;20} |
-    | S2   | Jones | {:city=&gt;&quot;Paris&quot;, :status=&gt;10}  |
-    | S3   | Blake | {:city=&gt;&quot;Paris&quot;, :status=&gt;30}  |
-    | S4   | Clark | {:city=&gt;&quot;London&quot;, :status=&gt;20} |
-    | S5   | Adams | {:city=&gt;&quot;Athens&quot;, :status=&gt;30} |
-    +------+-------+--------------------------------+
+    +------+
+    | :num |
+    +------+
+    |    1 |
+    |    2 |
+    |    3 |
+    |    4 |
+    |    5 |
+    |    6 |
+    |    7 |
+    |    8 |
+    |    9 |
+    |   10 |
+    +------+
+
+# That you can override
+$ alf generator -- 5 -- id
+
+    +-----+
+    | :id |
+    +-----+
+    |   1 |
+    |   2 |
+    |   3 |
+    |   4 |
+    |   5 |
+    +-----+
 </code></pre>
 
 

@@ -41,7 +41,7 @@
 
 
 <div class="subentry">Non-relational operators</div>
-<p class="ops"><a href="../shell/autonum.html">autonum</a>, <a href="../shell/clip.html">clip</a>, <a href="../shell/coerce.html">coerce</a>, <a href="../shell/compact.html">compact</a>, <a href="../shell/defaults.html">defaults</a>, <a href="../shell/sort.html">sort</a></p>
+<p class="ops"><a href="../shell/autonum.html">autonum</a>, <a href="../shell/clip.html">clip</a>, <a href="../shell/coerce.html">coerce</a>, <a href="../shell/compact.html">compact</a>, <a href="../shell/defaults.html">defaults</a>, <a href="../shell/generator.html">generator</a>, <a href="../shell/sort.html">sort</a></p>
 
 
 
@@ -105,6 +105,27 @@ $ alf join suppliers supplies
     | S4   | Clark |      20 | London | P4   |  300 |
     | S4   | Clark |      20 | London | P5   |  400 |
     +------+-------+---------+--------+------+------+
+
+# The following example demontrates the cross join feature with a generated 
+# relation
+$ alf generator -- 3 -- num | alf join cities
+
+    +------+----------+----------+
+    | :num | :city    | :country |
+    +------+----------+----------+
+    |    1 | London   | England  |
+    |    1 | Paris    | France   |
+    |    1 | Athens   | Greece   |
+    |    1 | Brussels | Belgium  |
+    |    2 | London   | England  |
+    |    2 | Paris    | France   |
+    |    2 | Athens   | Greece   |
+    |    2 | Brussels | Belgium  |
+    |    3 | London   | England  |
+    |    3 | Paris    | France   |
+    |    3 | Athens   | Greece   |
+    |    3 | Brussels | Belgium  |
+    +------+----------+----------+
 </code></pre>
 
 

@@ -7,30 +7,49 @@
 <![endif]--> 
 <link rel="stylesheet" href="http://yandex.st/highlightjs/6.0/styles/github.min.css">
 <link href="../css/style.css" rel='stylesheet'>
-<script src="http://yandex.st/highlightjs/6.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript" src="../js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="http://yandex.st/highlightjs/6.0/highlight.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    hljs.initHighlightingOnLoad();
+  });
+</script>
 </head>
 <body>
 <a href="http://github.com/blambeau/alf"><img style="position: fixed; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<script type="text/javascript">
+  var current = "overview";
+  function open(entry) {
+    hide(current);
+    current = entry;
+    show(current);
+  };
+  function show(entry) {
+    $('#menu-' + entry + " .content").slideDown();
+  };
+  function hide(entry) {
+    $('#menu-' + entry + " .content").slideUp();
+  };
+</script>
 
 <div id="menu">
 
-
-<div class="entry">Overview</div>
-<ul>
+<div class="menu-entry" id="menu-overview">
+<div class="head"><a href="javascript:open('overview');">Overview</a></div>
+<div class="content" ><ul>
 <li><a href="../overview/index.html">Home</a></li>
 <li><a href="../overview/why.html">Why Alf ?</a></li>
 <li><a href="../overview/relational-basics.html">Relational basics</a></li>
 <li><a href="../overview/one-proposal-three-flavors.html">One proposal, three flavors</a></li>
-<li><a href="../overview/alf-in-shell.html">Using Alf in shell</a></li>
-<li><a href="../overview/alf-in-ruby.html">Using Alf in Ruby</a></li>
 <li><a href="../overview/where-does-alf-come-from.html">Where does Alf come from?</a></li>
 </ul>
 
+</div>
+</div>
 
-
-<div class="entry">Alf in Shell</div>
-<div class="subentry">Relational operators</div>
+<div class="menu-entry" id="menu-shell">
+<div class="head"><a href="javascript:open('shell');">Alf in Shell</a></div>
+<div class="content" style="display:none;"><div class="subentry">Relational operators</div>
 <p class="ops"><a href="../shell/extend.html">extend</a>, <a href="../shell/group.html">group</a>, <a href="../shell/intersect.html">intersect</a>, <a href="../shell/join.html">join</a>, <a href="../shell/matching.html">matching</a>, <a href="../shell/minus.html">minus</a>, <a href="../shell/not-matching.html">not-matching</a>, <a href="../shell/project.html">project</a>, <a href="../shell/rank.html">rank</a>, <a href="../shell/rename.html">rename</a>, <a href="../shell/restrict.html">restrict</a>, <a href="../shell/summarize.html">summarize</a>, <a href="../shell/ungroup.html">ungroup</a>, <a href="../shell/union.html">union</a>, <a href="../shell/unwrap.html">unwrap</a>, <a href="../shell/wrap.html">wrap</a></p>
 
 
@@ -50,12 +69,14 @@
 
 
 
+</div>
+</div>
 
-
-<div class="entry">Alf in Ruby</div>
-...under construction...
-
-
+<div class="menu-entry" id="menu-ruby">
+<div class="head"><a href="javascript:open('ruby');">Alf in Ruby</a></div>
+<div class="content" style="display:none;">...under construction...
+</div>
+</div>
 
 </div>
 
@@ -64,32 +85,28 @@
 <div id="page">
 <h2>One proposal, three flavors</h2>
 
-<p>As I explain <a href="/overview/where-does-alf-come-from.html">here</a>, I've started Alf because I wanted to split the effective execution of benchmarks from the summarization and displaying of their results. It has been written with a strong background about relational theory, so that it ends up being actually a proposal of query language plus an implementation supporting three syntactic flavors.</p>
-
-<h3>Overview</h3>
-
-<p>Our query language proposal is not about the semantics of relational algebra, which is borrowed from <a href="http://thethirdmanifesto.com/">The Third Manifesto and TUTORIAL D</a>. Instead, it is about syntactic issues and a few suggestions for using relational algebra in dynamic languages like python, ruby, clojure, javascript and the like. We call the latter the &quot;hosting language&quot; below. Specifically, we propose</p>
+<p>Alf supports three syntactic flavors of relational algebra: one to use Alf in shell, two others to use it in Ruby (one with a functional style and an object-oriented one). This page summarizes the common parts in terms of:</p>
 
 <ul>
 <li>a list of <em>named relational operators</em> together with their <em>signature</em> in terms of <em>operands</em>, <em>arguments</em> and <em>options</em></li>
 <li>a specification of the <em>types</em> of arguments and options</li>
 </ul>
 
-<p>Note that, this is neither purely semantic nor purely syntactic and should be seen as a definition of an abstract Domain Specific Language (DSL) [1, 2]. Alf provides three syntactic flavors of this DSL (one for expressing queries in shell, two others for expressing queries in Ruby) and an execution engine. Note that,</p>
+<p>Note that, this is neither purely semantic nor purely syntactic. It should better be seen as a definition of an abstract Domain Specific Language (DSL) [1, 2] for which Alf provides three syntactic implementations. Note that,</p>
 
 <ul>
-<li>as such, the query language <strong>says nothing about how</strong> queries are executed. Alf's engine is a pragmatic reference implementation that tries not to load whole relations in memory, where possible [3].</li>
-<li>the boundaries of the proposed query language are intentionally limited to avoid perturbating the hosting language with concepts that would make it impossible to implement [4].</li>
-<li>in particular, it does not prescribe a predefined set of supported scalar types and operators. Most hosting languages support Boolean, Integer or String, etc. and provides users with ways for implementing new ones.</li>
+<li>as such, the DSL <strong>says nothing about how</strong> queries are executed. The Alf engine is a pragmatic implementation that tries not to load whole relations in memory, where possible. [3]</li>
+<li>the boundaries of the DSL are intentionally limited to avoid perturbating implementations with concepts that would make it impossible to implement. The aim here is to set a basis that could be ported without much effor to other dynamic languages such as clojure, python, javascript, and so on. [4] </li>
+<li>in particular, it does not prescribe a predefined set of supported scalar types and operators. Most implementation languages support Boolean, Integer or String, etc. and provides users with ways for implementing new ones.</li>
 </ul>
 
 <h3>Basic types</h3>
 
-<p>This section describes the basic types used in query expressions. The proposal <strong>does not prescribe any dedicated syntax for literals</strong>, that must be made clear by each DSL implementation. Examples below are valid literals when using the functional Ruby DSL of Alf. </p>
+<p>This section describes the basic types used in query expressions. Note that it does not prescribe any dedicated syntax for literals, that are implementation specific. Examples below are valid literals when using the functional Ruby DSL of Alf. </p>
 
 <h4>Name</h4>
 
-<p>A name is used to denote base relations, attributes and types. When relevant, the context distinguish between attribute names, relation names and type names. Examples are:</p>
+<p>A name is used to denote base relations, attributes and types. When relevant, the context distinguishes between attribute names, relation names and type names. Examples are:</p>
 
 <pre class="theory"><code class="ruby">:suppliers, :parts             # relation names
 :name, :city, :color_in_rgb    # attribute names
@@ -98,7 +115,7 @@ String, Float, Color           # type names
 
 <h4>Attribute list</h4>
 
-<p>An attribute list is simply a list of attribute <em>names</em>. Such a list has a left-to-right ordering which may or may not be relevant in the context of its use. Generally, duplicates in attributes lists does not make sense. Examples of attribute lists are:</p>
+<p>An attribute list is simply a list of attribute <em>names</em>. Such a list has a left-to-right ordering whose relevance is context specific. Generally, attribute lists have no duplicates. Examples of attribute lists are:</p>
 
 <pre class="theory"><code class="ruby">[]                      # the empty list
 [:name]                 # the singleton list
@@ -131,7 +148,62 @@ String, Float, Color           # type names
 
 <p>An ordering is a ordered mapping between attribute names and order directions. To stress the fact that an ordering is itself <em>ordered</em> (unlike a heading or a renaming), the idiomatic way of expressing orderings in the ruby DSL is as follows: </p>
 
-<p>... under construction ...</p>
+<pre class="theory"><code class="ruby">[]                                  # the empty ordering
+[[:name, :asc]]                     # name, in ascending order
+[[:name, :asc], [:city, :desc]]     # name in ascending order, then city in descending order
+</code></pre>
+
+<p>As full ascending orders are commonly used, the following shortcuts are also supported:</p>
+
+<pre class="theory"><code class="ruby">[:name]                             # name, in ascending order
+[:name, :city]                      # name in ascending order, then city in ascending order as well
+</code></pre>
+
+<h4>Tuple expression</h4>
+
+<p>A tuple expression is an expression evaluated in the context/scoping of a tuple. The DSL does not prescribe what forms a valid expression, which is implementation specific. We assume purely functional expressions, since the affectation is useless when considering relational algebra in isolation.</p>
+
+<p>In ruby DSL, Alf uses lambda functions for tuple expressions. For example:</p>
+
+<pre class="theory"><code class="ruby">->(){ true }                        # expression that always evaluates to true
+->(){ qty * price }                 # `qty` and `price` denote tuple attributes
+</code></pre>
+
+<h4>Tuple predicate</h4>
+
+<p>A tuple predicate is a tuple expression which returns a Boolean value. For example:</p>
+
+<pre class="theory"><code class="ruby">->(){ true }                        # the `true` predicate
+->(){ qty > 100 }                   # `qty` denotes a tuple attribute
+</code></pre>
+
+<h4>Tuple computation</h4>
+
+<p>A tuple computation is a mapping between attribute names and tuple expressions (a partial function, in fact). For example:</p>
+
+<pre class="theory"><code class="ruby">{}                                                         # the empty computation
+{:total => ->(){ qty * price }}                            # a singleton computation
+{:big => ->{ qty > 100 }, :total => ->(){ qty * price }}   # a general case
+</code></pre>
+
+<h4>Summarizing expression</h4>
+
+<p>A summarizing expression denotes the name of a summarization operator together with a tuple expression. For example:</p>
+
+<pre class="theory"><code class="ruby">count{ }
+sum{ qty * price }             # `qty` and `price` denote tuple attributes
+</code></pre>
+
+<p>Alf currently supports the following summarization operators: <code>count</code>, <code>sum</code>, <code>avg</code>, <code>max</code>, <code>min</code>, <code>group</code>, <code>collect</code> and <code>concat</code>.</p>
+
+<h4>Summarization</h4>
+
+<p>A summarization is a mapping between attribute names and summarizing expressions. For example:</p>
+
+<pre class="theory"><code class="ruby">{}                                                    # the empty summarization
+{:howmany => count{ }}                                # a singleton summarization
+{:howmany => count{ }, :total => sum{ qty * price }}  # a general case
+</code></pre>
 
 <h3>References and footnotes</h3>
 

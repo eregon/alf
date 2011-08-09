@@ -29,7 +29,9 @@
     show(current);
   };
   function show(entry) {
-    $('#menu-' + entry + " .content").slideDown();
+    $('#menu-' + entry + " .content").slideDown(function(){
+      window.location = entry + "/index.html";
+    });
   };
   function hide(entry) {
     $('#menu-' + entry + " .content").slideUp();
@@ -101,11 +103,12 @@
 
 <p><strong>This operator is a work in progress and should be used with care.</strong></p>
 
-<p>This operator is an attempt to generalize RANK in two ways:
-  * Use a full SUMMARIZATION instead of hard-coding a ranking attribute 
-    through count()
-  * Providing a BY key so that sumarizations can actually be done on 
-    sub-groups</p>
+<p>This operator is an attempt to generalize RANK in two ways:</p>
+
+<ul>
+<li>Use a full SUMMARIZATION instead of hard-coding a ranking attribute through count()</li>
+<li>Providing a BY key so that sumarizations can actually be done on sub-groups</li>
+</ul>
 
 <p>EXAMPLE</p>
 

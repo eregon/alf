@@ -29,7 +29,9 @@
     show(current);
   };
   function show(entry) {
-    $('#menu-' + entry + " .content").slideDown();
+    $('#menu-' + entry + " .content").slideDown(function(){
+      window.location = entry + "/index.html";
+    });
   };
   function hide(entry) {
     $('#menu-' + entry + " .content").slideUp();
@@ -100,7 +102,7 @@
 <h3>Example</h3>
 
 <pre class="theory"><code class="ruby">#                                                 
-# What are total weight of supplied products,     
+# What is the total weight of supplied products,     
 # by city, then by product id?                    
 #                                                 
 (group                                            +--------+---------------------+

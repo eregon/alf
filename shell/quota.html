@@ -137,7 +137,7 @@
 <p>EXAMPLE</p>
 
 <pre><code># Compute linear progression of quantities by supplier number
-$ alf quota supplies -- sid -- qty -- position count  sum_qty &quot;sum(:qty)&quot;
+$ alf quota supplies -- sid -- qty -- position count  sum_qty &quot;sum{ qty }&quot;
 
     +------+------+------+-----------+----------+
     | :sid | :pid | :qty | :position | :sum_qty |

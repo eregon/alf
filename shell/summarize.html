@@ -140,7 +140,7 @@ in BY as the projection key.</p>
 <p>EXAMPLE</p>
 
 <pre><code># Compute the sum of supplied quantities, by supplier id
-$ alf summarize supplies -- sid -- total_qty &quot;sum(:qty)&quot;
+$ alf summarize supplies -- sid -- total_qty &quot;sum{ qty }&quot;
 
     +------+------------+
     | :sid | :total_qty |

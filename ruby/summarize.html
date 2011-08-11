@@ -140,7 +140,7 @@ in BY as the projection key.</p>
 <p>EXAMPLE</p>
 
 <pre><code># Compute the sum of supplied quantities, by supplier id
-$ (summarize :supplies, [:sid], {:total_qty =&gt; sum(:qty)})
+$ (summarize :supplies, [:sid], {:total_qty =&gt; sum{ qty }})
 
     +------+------------+
     | :sid | :total_qty |

@@ -5,10 +5,10 @@
 <!--[if lt IE 9]>
 <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
 <![endif]--> 
-<base href="http://blambeau.github.com/alf/index.html" />
 <!--
 <base href="file:///home/blambeau/work/devel/alf/doc/deploy-gh-pages/index.html" />
 -->
+<base href="http://blambeau.github.com/alf/index.html" />
 <link rel="stylesheet" href="http://yandex.st/highlightjs/6.0/styles/github.min.css">
 <link href="css/style.css" rel='stylesheet'>
 <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
@@ -80,7 +80,21 @@
 
 <div class="menu-entry" id="menu-ruby">
 <div class="head"><a href="javascript:open('ruby');">Alf in Ruby</a></div>
-<div class="content" style="display:none;">...under construction...
+<div class="content" style="display:none;"><div class="subentry">Relational operators</div>
+<p class="ops"><a href="ruby/extend.html">extend</a>, <a href="ruby/group.html">group</a>, <a href="ruby/intersect.html">intersect</a>, <a href="ruby/join.html">join</a>, <a href="ruby/matching.html">matching</a>, <a href="ruby/minus.html">minus</a>, <a href="ruby/not-matching.html">not-matching</a>, <a href="ruby/project.html">project</a>, <a href="ruby/rank.html">rank</a>, <a href="ruby/rename.html">rename</a>, <a href="ruby/restrict.html">restrict</a>, <a href="ruby/summarize.html">summarize</a>, <a href="ruby/ungroup.html">ungroup</a>, <a href="ruby/union.html">union</a>, <a href="ruby/unwrap.html">unwrap</a>, <a href="ruby/wrap.html">wrap</a></p>
+
+
+
+<div class="subentry">Experimental operators</div>
+<p class="ops"><a href="ruby/quota.html">quota</a></p>
+
+
+
+<div class="subentry">Non-relational operators</div>
+<p class="ops"><a href="ruby/autonum.html">autonum</a>, <a href="ruby/clip.html">clip</a>, <a href="ruby/coerce.html">coerce</a>, <a href="ruby/compact.html">compact</a>, <a href="ruby/defaults.html">defaults</a>, <a href="ruby/generator.html">generator</a>, <a href="ruby/sort.html">sort</a></p>
+
+
+
 </div>
 </div>
 
@@ -113,6 +127,35 @@
 
 <p>This operator flattens its operand by unwrapping the tuple-valued 
 attribute ATTR.</p>
+
+<p>EXAMPLE</p>
+
+<pre><code># Given, `city` and `status` wrapped as `loc_and_status` 
+$ alf wrap suppliers -- city status -- loc_and_status
+
+    +------+-------+--------------------------------+
+    | :sid | :name | :loc_and_status                |
+    +------+-------+--------------------------------+
+    | S1   | Smith | {:city=&gt;&quot;London&quot;, :status=&gt;20} |
+    | S2   | Jones | {:city=&gt;&quot;Paris&quot;, :status=&gt;10}  |
+    | S3   | Blake | {:city=&gt;&quot;Paris&quot;, :status=&gt;30}  |
+    | S4   | Clark | {:city=&gt;&quot;London&quot;, :status=&gt;20} |
+    | S5   | Adams | {:city=&gt;&quot;Athens&quot;, :status=&gt;30} |
+    +------+-------+--------------------------------+
+
+# Let's unwrap them
+$ alf wrap suppliers -- city status -- loc_and_status | alf unwrap -- loc_and_status
+
+    +------+-------+--------+---------+
+    | :sid | :name | :city  | :status |
+    +------+-------+--------+---------+
+    | S1   | Smith | London |      20 |
+    | S2   | Jones | Paris  |      10 |
+    | S3   | Blake | Paris  |      30 |
+    | S4   | Clark | London |      20 |
+    | S5   | Adams | Athens |      30 |
+    +------+-------+--------+---------+
+</code></pre>
 
 
 </div>

@@ -119,7 +119,7 @@
 <div id="page">
 <h2>Alf &mdash; Guided tour</h2>
 
-<p>Alf is shipped with example relations and is wired to them by default. The relations are based on the popular <em>suppliers-and-parts</em> example that C.J. Date uses in all his books (<em>S</em>, <em>P</em> and <em>SP</em> there are called <code>:suppliers</code>, <code>:parts</code> and <code>:supplies</code> here, respectively). Once Alf is installed, try this:</p>
+<p>Alf is shipped with example relations and is wired to them by default. These relations are based on the popular <em>suppliers-and-parts</em> example that C.J. Date uses in all his books (<em>S</em>, <em>P</em> and <em>SP</em> there are called <code>:suppliers</code>, <code>:parts</code> and <code>:supplies</code> here, respectively). Once Alf is installed, try this:</p>
 
 <pre class="theory"><code class="ruby">$ alf show database
 +-------------------------------------+----------------------------------------------+------------------------+
@@ -158,11 +158,11 @@
 +------+-------+---------+--------+--------------------+
 </code></pre>
 
-<p>Of course, Alf is not limited to the <em>suppliers-and-parts</em> example, it recognizes various sources for base &quot;relations&quot;.</p>
+<p>All examples in Alf documentation are based on this &quot;database&quot;. Relation names are also magically resolved (as in the example above), so that you can learn quickly and easily. Of course, Alf is not limited to the <em>suppliers-and-parts</em> example. It actually recognizes various sources for base &quot;relations&quot;.</p>
 
-<ul>
-<li>It recognizes .csv files as first class citizens. Download <a href="downloads/books.csv">books.csv</a> and save it somewhere (credits to <a href="http://www.parseomatic.com/parse/pskb/CSV-File-Format.htm">parseomatic.com</a>). Then try:</li>
-</ul>
+<h3>Manipulating .csv files</h3>
+
+<p>Alf recognizes .csv files as first class citizens. Download <a href="downloads/books.csv">books.csv</a> and save it somewhere (credits to <a href="http://www.parseomatic.com/parse/pskb/CSV-File-Format.htm">parseomatic.com</a>). Then try:</p>
 
 <pre class="theory"><code class="ruby">$ alf show books.csv
 +--------------+-----------------------------+------------+--------+
@@ -172,6 +172,36 @@
 | 1990/01/12   | Douglas Hofstadter          | 0465026567 | 9.95   |
 | 1998/07/15   | Timothy The Parser Campbell | 0968411304 | 18.99  |
 | ...          | ...                         | ...        | ...    |
+</code></pre>
+
+<p>Oh, of course; .csv files are text files (observe that <code>:price</code> is aligned at left). Let see what we can do here (coercing <code>:review_date</code> to a Time is a bit contrived, but you've got the point!)</p>
+
+<pre class="theory"><code class="ruby">$ alf --text coerce books.csv -- review_date "Time" price "Float"
++---------------------------+-----------------------------+------------+--------+
+| :review_date              | :author                     | :isbn      | :price |
++---------------------------+-----------------------------+------------+--------+
+| 1985-01-21 00:00:00 +0100 | Douglas Adams               | 0345391802 |  5.950 |
+| 1990-01-12 00:00:00 +0100 | Douglas Hofstadter          | 0465026567 |  9.950 |
+| 1998-07-15 00:00:00 +0200 | Timothy The Parser Campbell | 0968411304 | 18.990 |
+| ...                       | ...                         | ...        | ...    |
+</code></pre>
+
+<h3>Connecting to SQL sources</h3>
+
+<p>Alf is also able to connect to your SQL servers and files. For example, suppose that you have a SQLite <code>northwind.db</code> file. Try this:</p>
+
+<pre class="theory"><code class="ruby">$ alf --env=northwind.db --text project customers -- Country
++-------------+
+| :Country    |
++-------------+
+| Germany     |
+| Mexico      |
+| UK          |
+| Sweden      |
+| France      |
+| Spain       |
+| Canada      |
+| ...         |
 </code></pre>
 
 </div>

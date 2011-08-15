@@ -50,8 +50,8 @@
 <li><a href="overview/why.html">Why Alf ?</a></li>
 <li><a href="overview/guided-tour.html">Guided tour</a></li>
 <li><a href="overview/relational-basics.html">Relational basics</a></li>
-<li><a href="overview/one-proposal-three-flavors.html">One proposal, three flavors</a></li>
 <li><a href="overview/further-reading.html">Further reading</a></li>
+<li><a href="overview/faq.html">FAQ</a></li>
 </ul>
 
 </div>
@@ -105,6 +105,7 @@
 <div class="menu-entry" id="menu-devel">
 <div class="head"><a href="javascript:open('devel');">Development</a></div>
 <div class="content" style="display:none;"><ul>
+<li><a href="devel/contributors.html">Contributors</a></li>
 <li><a href="devel/index.html">Contribute</a></li>
 <li><a href="devel/licence.html">Licence</a></li>
 </ul>
@@ -119,14 +120,23 @@
 <div id="page">
 <h2>Using Alf in shell</h2>
 
-<p>Alf comes with a set of shell commands to manipulate data with relational algebra. Those commands are able to manipulate .csv files, SQL tables, log files, and so on. If you know ruby, writing an adapter for recognizing other data sources is almost straightforward.</p>
+<p>Alf comes with a set of operators and commands to evaluate relational queries (see the menu at left). </p>
 
-<pre><code class="bash">#
-# What is the total weight of supplied products, 
+<ul>
+<li>Operators always take relations (often one) as input and output a relation. </li>
+<li>Input relations may come from .rash files (ruby hashes), .csv files, SQL tables, log files, and so on.</li>
+<li>Alf is read-only: it never modifies the files or SQL tables where the data come from!</li>
+</ul>
+
+<p>Here is an example:</p>
+
+<pre><code class="bash"># What is the total weight of supplied products, 
 # by city, then by product id?
-#
 
-$ alf join parts supplies | alf summarize -- city pid -- total 'sum{weight*qty}' | alf group -- pid total -- supplying | alf show
+$ alf join parts supplies | \
+  alf summarize -- city pid -- total 'sum{weight*qty}' | \
+  alf group -- pid total -- supplying | \
+  alf show
 
 +--------+---------------------+
 | :city  | :supplying          |
@@ -140,9 +150,9 @@ $ alf join parts supplies | alf summarize -- city pid -- total 'sum{weight*qty}'
 | ...    | | ...  | ...     |  |
 </code></pre>
 
-<p>Alf provides you with a fully-featured relational algebra, see <code>alf --help</code> for the list of commands or have a look at the menu at left.</p>
+<p>Refer to the menu at left to learn about available operators.</p>
 
-<h3>A few stuff you want to know</h3>
+<h3>A few bits and pieces you want to know</h3>
 
 <ul>
 <li>Alf is not limited to the use of simple scalar types. Attribute can be any ruby class/object implementing a type/value in a consistent way. You also have full Ruby power in expressions:</li>
@@ -151,7 +161,14 @@ $ alf join parts supplies | alf summarize -- city pid -- total 'sum{weight*qty}'
 <pre><code class="terminal">$ alf restrict suppliers -- "city =~ /^P/"</code></pre>
 
 <ul>
-<li>You can use .csv or .log files as first class input relations</li>
+<li>Alf automatically resolves relation names according to an environment of use. By default, the latter is bound to the examples bundled with Alf. This way, you can learn Alf without worrying about where data come from, or even get it:</li>
+</ul>
+
+<pre><code class="terminal">$ alf show suppliers
+$ alf --csv show suppliers > suppliers.csv</code></pre>
+
+<ul>
+<li>But, you can also use .csv or .log files as first class input relations</li>
 </ul>
 
 <pre><code class="terminal">$ alf restrict suppliers.csv -- "city == 'Paris'"</code></pre>
@@ -161,13 +178,6 @@ $ alf join parts supplies | alf summarize -- city pid -- total 'sum{weight*qty}'
 </ul>
 
 <pre><code class="terminal">$ alf --yaml restrict suppliers.csv -- "city == 'Paris'"</code></pre>
-
-<ul>
-<li>Alf automatically resolves relation names according to an environment of use. By default, the latter is bound to the examples bundled with Alf. This way, you can learn Alf without worrying about where data come from, or even get it:</li>
-</ul>
-
-<pre><code class="terminal">$ alf show suppliers
-$ alf --csv show suppliers > suppliers.csv</code></pre>
 
 <ul>
 <li>Of course, you can connect Alf to other datasources</li>

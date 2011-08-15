@@ -50,8 +50,8 @@
 <li><a href="overview/why.html">Why Alf ?</a></li>
 <li><a href="overview/guided-tour.html">Guided tour</a></li>
 <li><a href="overview/relational-basics.html">Relational basics</a></li>
-<li><a href="overview/one-proposal-three-flavors.html">One proposal, three flavors</a></li>
 <li><a href="overview/further-reading.html">Further reading</a></li>
+<li><a href="overview/faq.html">FAQ</a></li>
 </ul>
 
 </div>
@@ -105,6 +105,7 @@
 <div class="menu-entry" id="menu-devel">
 <div class="head"><a href="javascript:open('devel');">Development</a></div>
 <div class="content" style="display:none;"><ul>
+<li><a href="devel/contributors.html">Contributors</a></li>
 <li><a href="devel/index.html">Contribute</a></li>
 <li><a href="devel/licence.html">Licence</a></li>
 </ul>
@@ -158,13 +159,14 @@
 +------+-------+---------+--------+--------------------+
 </code></pre>
 
-<p>All examples in Alf documentation are based on this &quot;database&quot;. Relation names are also magically resolved (as in the example above), so that you can learn quickly and easily. Of course, Alf is not limited to the <em>suppliers-and-parts</em> example. It actually recognizes various sources for base &quot;relations&quot;.</p>
+<p>All examples in Alf documentation are based on this &quot;database&quot;. Relation names are automatically resolved (as in the example above), so that you can learn quickly and easily. Of course, Alf is not limited to the <em>suppliers-and-parts</em> example. It actually recognizes various sources for base &quot;relations&quot;.</p>
 
 <h3>Manipulating .csv files</h3>
 
 <p>Alf recognizes .csv files as first class citizens. Download <a href="downloads/books.csv">books.csv</a> and save it somewhere (credits to <a href="http://www.parseomatic.com/parse/pskb/CSV-File-Format.htm">parseomatic.com</a>). Then try:</p>
 
-<pre class="theory"><code class="ruby">$ alf show books.csv
+<pre class="theory"><code class="ruby">$ cd somewhere
+$ alf show books.csv
 +--------------+-----------------------------+------------+--------+
 | :review_date | :author                     | :isbn      | :price |
 +--------------+-----------------------------+------------+--------+
@@ -186,9 +188,22 @@
 | ...                       | ...                         | ...        | ...    |
 </code></pre>
 
+<p>Now that types are properly recognized, you may manipulate your data with the conjoined power of Alf and Ruby: </p>
+
+<pre class="theory"><code class="ruby">$ alf coerce books.csv -- review_date "Time" | alf --text restrict -- "review_date.year == 2004"
++---------------------------+-------------------+------------+--------+
+| :review_date              | :author           | :isbn      | :price |
++---------------------------+-------------------+------------+--------+
+| 2004-10-04 00:00:00 +0200 | Benjamin Radcliff | 0804818088 |  4.950 |
+| 2004-10-04 00:00:00 +0200 | Randel Helms      | 0879755725 |  4.500 |
++---------------------------+-------------------+------------+--------+
+</code></pre>
+
+<p>&raquo; Read more about using <a href="shell/index">Alf in Shell</a></p>
+
 <h3>Connecting to SQL sources</h3>
 
-<p>Alf is also able to connect to your SQL servers and files. For example, suppose that you have a SQLite <code>northwind.db</code> file. Try this:</p>
+<p>Alf is also able to connect to SQL servers and SQLite files (provided that you install the <code>sequel</code> ruby library, as well as specific adapters: <code>pg</code>, <code>sqlite3</code>, and so on.). For example, suppose that you have a SQLite <code>northwind.db</code> file. Try this:</p>
 
 <pre class="theory"><code class="ruby">$ alf --env=northwind.db --text project customers -- Country
 +-------------+
@@ -201,6 +216,19 @@
 | France      |
 | Spain       |
 | Canada      |
+| ...         |
+</code></pre>
+
+<p>In the example above, the returned relation will never contain duplicate country names. Unlike SQL, here, relations are <em>sets</em>, not <em>bags</em>. The <code>project</code> operator automatically removes duplicates. </p>
+
+<p>Now, maybe you use a PostgreSQL database, or MySQL, etc.? No problem! Every DBMS supported by <code>sequel</code>, is supported by Alf (with credits to Jeremy Evans for such awesomeness):</p>
+
+<pre class="theory"><code class="ruby">$ alf --env=postgres://user:password@localhost:port/database --text project customers -- Country
++-------------+
+| :Country    |
++-------------+
+| Germany     |
+| Mexico      |
 | ...         |
 </code></pre>
 
